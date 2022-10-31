@@ -14,6 +14,6 @@ Profesores: María José Rotter, Karina Rozas, David Torchinsky, Cristian Torres
 Grupo N° 11
 
 - **Fernando Lagos**: Legajo FAI-2579 - Mail: fernando.lagos@est.fi.uncoma.edu.ar - Github: FernandoLagos05
-- **Joaquín Irigoyen**
+- **Joaquín Irigoyen**: Legajo FAI-4223 - Mail: joaquin.iri25@gmail.com - github: joaquinirigoyen
 - **Rodrigo Martínez**: Legajo FAI-4318 - Mail: rodrigo.martinez@est.fi.uncoma.edu.ar - GitHub: Romartinez97
 - **Santiago Dominguez**
