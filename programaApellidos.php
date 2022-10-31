@@ -15,7 +15,7 @@ include_once("wordix.php");
 /**************************************/
 
 /**
- * Obtiene una colección de palabras
+ * Inicializa una colección de palabras
  * @return array
  */
 function cargarColeccionPalabras()
@@ -29,6 +29,7 @@ function cargarColeccionPalabras()
 
     return ($coleccionPalabras);
 }
+
 
 /* ... COMPLETAR ... */
 
