@@ -26,7 +26,7 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-/**
+/**      (REVISAR SI COMPLETE CORRECTAMENTE)
  *  Solicita un numero entre un Nro minimo y un Nro Maximo
  *  @param int $min
  *  @param int $max
@@ -115,7 +115,8 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * Escribe en pantalla un mensaje de bienvenida. 
+ * @param string $usuario
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -127,8 +128,10 @@ function escribirMensajeBienvenida($usuario)
 }
 
 
-/**
- * ****COMPLETAR*****
+/**      (VERIFICAR SI COMPLETE CORRECTAMENTE
+ * 
+ * @param string $cadena
+ * @return boolean 
  */
 function esPalabra($cadena)
 {
