@@ -404,12 +404,12 @@ function seleccionarOpcion(){
     echo "\n   8) Salir\n";
     
     do {
-        echo "\nIngrese un número del 1 al 7 para elegir la opción: ";
+        echo "\nIngrese un número del 1 al 8 para elegir la opción: ";
         $opcion = trim(fgets(STDIN));
-        if ($opcion <= 0 || $opcion > 7){
+        if ($opcion <= 0 || $opcion > 8){
             echo "\n¡VALOR NO VALIDO! Por favor ingrese un número valido\n";
         }
-    } while ($opcion <= 0 || $opcion > 7);
+    } while ($opcion <= 0 || $opcion > 8);
     
     return $opcion;
 }
