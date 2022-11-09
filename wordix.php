@@ -456,3 +456,23 @@ function nombreEnMinusculas(){
     $jugadorMinusculas = strtolower ($jugador);
     return $jugadorMinusculas;
 }
+/**
+ * funcion sin retorno que según el usuario, va a devolver los datos de la partida seleccionada de la coleccion de partidas
+ * @param array $coleccionPartidas
+ * @param int $num
+ */
+function mostrarPartida($coleccionPartidas, $num){
+    // int $valorLimite
+    $valorLimite = count ($coleccionPartidas);
+        if (($num) <= $valorLimite){
+            echo "PARTIDA Wordix número ".($num)." : palabra ". $coleccionPartidas[($num-1)]["palabraWordix"]."\n";
+            echo    "Jugador: ".$coleccionPartidas[($num-1)]["jugador"]."\n";
+            echo "Puntaje: ".$coleccionPartidas[($num-1)]["puntaje"]."\n";
+            if ($coleccionPartidas[($num-1)]["puntaje"] > 0){
+                echo "Intento: Adivino la palabra en ".$coleccionPartidas[($num-1)]["intentos"]." intentos\n";
+            }else{
+                echo "No adivino la palabra";
+            }
+        
+        }
+}
