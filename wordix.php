@@ -384,3 +384,32 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
     return $partida;
 }
+/**
+ * funcion encargada de imprimir el menú de opciones con el que el usuario va a interactuar
+ * funcion sin parametros actuales, devuelve un valor entero necesario para las otras funciones
+ * @return int
+ */
+function seleccionarOpcion(){
+
+    //ACA VA A IMPRIMIR EL MENU DE OPCIONES
+    
+    echo "\n -------- MENÚ DE OPCIONES--------\n";
+    echo "\n   1) Jugar al Wordix con una palabra elegida";
+    echo "\n   2) Jugar al Wordix con una palabra aleatoria";
+    echo "\n   3) Mostrar una partida";
+    echo "\n   4) Mostrar la primer partida ganadora";
+    echo "\n   5) Mostrar resumen de jugador";
+    echo "\n   6) Mostrar listado de partidas ordenadas por jugador y palabra";
+    echo "\n   7) Agregar una palabra de 5 letras a Wordix";
+    echo "\n   8) Salir\n";
+    
+    do {
+        echo "\nIngrese un número del 1 al 7 para elegir la opción: ";
+        $opcion = trim(fgets(STDIN));
+        if ($opcion <= 0 || $opcion > 7){
+            echo "\n¡VALOR NO VALIDO! Por favor ingrese un número valido\n";
+        }
+    } while ($opcion <= 0 || $opcion > 7);
+    
+    return $opcion;
+}
