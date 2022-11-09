@@ -413,3 +413,46 @@ function seleccionarOpcion(){
     
     return $opcion;
 }
+
+/**
+ * Inicializa una colección de partidas
+ * @return array
+ */
+function cargarPartidas()
+{
+    $coleccionPartidas = [];
+    $coleccionPartidas[0] = ["palabraWordix" => "QUESO","jugador" => "Juan", "intentos" => 1, "puntaje" => 15];
+    $coleccionPartidas[1] = ["palabraWordix" => "RASGO","jugador" => "Maria", "intentos" => 2, "puntaje" => 14];
+    $coleccionPartidas[2] = ["palabraWordix" => "GATOS","jugador" => "Pedro", "intentos" => 3, "puntaje" => 14];
+    $coleccionPartidas[3] = ["palabraWordix" => "MUJER","jugador" => "Juan", "intentos" => 4, "puntaje" => 12];
+    $coleccionPartidas[4] = ["palabraWordix" => "FUEGO","jugador" => "Pablo", "intentos" => 5, "puntaje" => 9];
+    $coleccionPartidas[5] = ["palabraWordix" => "CASAS","jugador" => "Juan", "intentos" => 7, "puntaje" => 0];
+    $coleccionPartidas[6] = ["palabraWordix" => "GOTAS","jugador" => "Ana", "intentos" => 2, "puntaje" => 15];
+    $coleccionPartidas[7] = ["palabraWordix" => "HUEVO","jugador" => "Juan", "intentos" => 6, "puntaje" => 8];
+    $coleccionPartidas[8] = ["palabraWordix" => "CASAS","jugador" => "Carlos", "intentos" => 7, "puntaje" => 0];
+    $coleccionPartidas[9] = ["palabraWordix" => "ZORRO","jugador" => "Carlos", "intentos" => 2, "puntaje" => 16];  
+ 
+    return ($coleccionPartidas);
+}
+
+/**
+ * Escribe el nombre de un jugador en minúsculas, asegurando que el nombre empiece
+ * con una letra
+ * @return string
+ */
+function nombreEnMinusculas(){
+    //array $cadenaJugador
+    //string $jugador, $jugadorMinusculas
+    $cadenaJugador = [];
+    $jugadorMinusculas = "";
+    echo "Ingrese el nombre del jugador: ";
+    $jugador = trim(fgets(STDIN));
+    $cadenaJugador = str_split ($jugador);
+    while (!(ctype_alpha($cadenaJugador[0]))){
+        echo "El nombre no empieza con una letra, ingrese un nombre válido (debe empezar con una letra).";
+        $jugador = trim(fgets(STDIN));
+        $cadenaJugador = str_split ($jugador);
+    }
+    $jugadorMinusculas = strtolower ($jugador);
+    return $jugadorMinusculas;
+}
