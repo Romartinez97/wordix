@@ -476,3 +476,17 @@ function mostrarPartida($coleccionPartidas, $num){
         
         }
 }
+/**
+ * funcion encargada de actualizar la estructura $coleccionPalabras cada vez que se añade una nueva palabra
+ * @param array $coleccionPalabras
+ * @return array
+ 
+*/
+function agregarPalabra ($array){
+    // string $palabra
+    $cantElementos = count ($array);
+    echo "Ingrese la palabra a añadir: ";
+    $palabra = trim(fgets(STDIN));
+    $array [$cantElementos] = $palabra;
+    return $array;
+}
