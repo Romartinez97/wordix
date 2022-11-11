@@ -128,8 +128,8 @@ function escribirMensajeBienvenida($usuario)
 }
 
 
-/**      (VERIFICAR SI COMPLETE CORRECTAMENTE
- * 
+/** 
+ * Verifica si una palabra ingresa es correcta
  * @param string $cadena
  * @return boolean 
  */
@@ -146,8 +146,9 @@ function esPalabra($cadena)
     return $esLetra;
 }
 
-/**
- *  ****COMPLETAR*****
+/** (revisar)
+ *  Leer una palabra de 5 letras
+ * @return string
  */
 function leerPalabra5Letras()
 {
@@ -249,7 +250,7 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
  * @param string $palabraIntento
  * @return array estructura wordix modificada
  */
-function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)
+function analizarPalabraIntento($palabraWordix, $estructuraIntentosWordix, $palabraIntento)
 {
     $cantCaracteres = strlen($palabraIntento);
     $estructuraPalabraIntento = []; /*almacena cada letra de la palabra intento con su estado */
@@ -307,7 +308,7 @@ function actualizarTeclado($teclado, $estructuraPalabraIntento)
  * @param array $estructuraPalabraIntento
  * @return bool
  */
-function esIntentoGanado($estructuraPalabraIntento)
+function esIntentoGanado($estruturaPalabraIntento)
 {
     $cantLetras = count($estructuraPalabraIntento);
     $i = 0;
