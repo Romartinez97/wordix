@@ -146,7 +146,7 @@ function esPalabra($cadena)
     return $esLetra;
 }
 
-/** (revisar)
+/**
  *  Leer una palabra de 5 letras
  * @return string
  */
@@ -491,3 +491,4 @@ function agregarPalabra ($array){
     $array [$cantElementos] = $palabra;
     return $array;
 }
+
