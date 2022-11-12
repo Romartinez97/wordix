@@ -5,9 +5,11 @@ include_once("wordix.php");
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
 
-/* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ... COMPLETAR ... */
 
+/*Lagos, Fernando. Legajo FAI-2579. Tecnicatura Universitaria en Desarrollo Web. Mail: fernando.lagos@est.fi.uncoma.edu.ar. Github: FernandoLagos05
+Irigoyen, Joaquín. Legajo FAI-4223. Tecnicatura Universitaria en Desarrollo Web. Mail: joaquin.iri25@gmail.com. Github: joaquinirigoyen
+Martínez Rodrigo. Legajo FAI-4318. Tecnicatura Universitaria en Desarrollo Web. Mail: rodrigo.martinez@est.fi.uncoma.edu.ar. GitHub: Romartinez97
+Dominguez, Santiago. Legajo FAI-4244. Tecnicatura Universitaria en Desarrollo Web. Mail: santiago.dominguez@est.fi.uncoma.edu.ar. Github: sdominguez0271*/
 
 
 /**************************************/
