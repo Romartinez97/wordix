@@ -327,13 +327,67 @@ function esIntentoGanado($estruturaPalabraIntento)
 }
 
 /**
- * ****COMPLETAR***** documentación de la intefaz
+ * Obtine el puntaje de una partida teniendo en cuenta la palabra y el numero de intento
+ * @param int $nroIntento
+ * @param string $palabra
+ * @return int
  */
-function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
-{
 
-    /* ****COMPLETAR***** cuerpo de la función*/
-    return 0;
+function obtenerPuntajeWordix($nroIntento, $palabra)
+{
+    //int , $puntajeInt, $puntajePalabra, $puntajeTotal, $n
+    //array , $arrayPalabra
+    if ($nroIntento == 0)
+    {
+        $puntajeTotal = 0;
+    }
+    if ($nroIntento == 1)
+    {
+        $puntajeInt = 6;
+    }
+    elseif ($nroIntento == 2)
+    {
+        $puntajeInt = 5;
+    }
+    elseif ($nroIntento == 3)
+    {
+        $puntajeInt = 4;
+    }
+    elseif ($nroIntento == 4)
+    {
+        $puntajeInt = 3;
+    }
+    elseif ($nroIntento == 5)
+    {
+        $puntajeInt = 2;
+    }
+    elseif ($nroIntento == 6) 
+    {
+        $puntajeInt = 1;
+    }
+    $arrayPalabra = str_split($palabra);
+    $puntajePalabra = 0;
+    $n = count($arrayPalabra);
+    for ($i=0; $i < $n; $i++) 
+    {
+        if ( $arrayPalabra[$i] == "a"||"e"||"i"||"o"||"u")
+        {
+            $puntajePalabra = $puntajePalabra + 1;
+            
+        }
+        elseif ( $arrayPalabra[$i] == "b"||"c"||"d"||"e"||"f"||"g"||"h"||"i"||"j"||"k"||"l"||"m")
+        {
+            $puntajePalabra = $puntajePalabra + 2;
+        }
+        elseif ($arrayPalabra[$i] == "n"||"ñ"||"o"||"p"||"q"||"r"||"s"||"t"||"u"||"v"||"w"||"x"||"y"||"z") 
+        {
+            $puntajePalabra = $puntajePalabra + 3;
+        }
+    }
+
+    $puntajeTotal = $puntajeInt + $puntajePalabra;
+    return $puntajeTotal;
+
 }
 
 /**
