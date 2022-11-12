@@ -490,5 +490,31 @@ function agregarPalabra ($array){
     $palabra = trim(fgets(STDIN));
     $array [$cantElementos] = $palabra;
     return $array;
+    
 }
 
+function primerPartida ($coleccionPartidas){
+$i=-1;
+echo  "ingrese el nombre del jugador";
+$nombre = trim(fgets(STDIN));
+do {
+$i++;
+    if ($coleccionPartidas [$i]["jugador"] == $nombre && $coleccionPartidas [$i]["puntaje"] > 0){
+
+        echo "el indice de la primera partida ganada es: ",$i;
+    } 
+    else if ($coleccionPartidas [$i]["jugador"] == $nombre && $coleccionPartidas [$i]["puntaje"] <= 0){
+        echo "-1";
+    }
+    
+}  while ($coleccionPartidas [$i]["jugador"] == $nombre ) ;
+
+
+
+function resumenJ ($resumenJugador){
+echo  "ingrese el nombre del jugador";
+$nombrej = trim(fgets(STDIN));   
+
+}
+  
+}  
