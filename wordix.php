@@ -552,5 +552,55 @@ function agregarPalabra ($array){
     $palabra = trim(fgets(STDIN));
     $array [$cantElementos] = $palabra;
     return $array;
+    
 }
 
+function primerPartida ($coleccionPartidas){
+$i=-1;
+echo  "ingrese el nombre del jugador";
+$nombre = trim(fgets(STDIN));
+do {
+$i++;
+    if ($coleccionPartidas [$i]["jugador"] == $nombre && $coleccionPartidas [$i]["puntaje"] > 0){
+
+        echo "el indice de la primera partida ganada es: ",$i;
+    } 
+    else if ($coleccionPartidas [$i]["jugador"] == $nombre && $coleccionPartidas [$i]["puntaje"] <= 0){
+        echo "-1";
+    }
+    
+}  while ($coleccionPartidas [$i]["jugador"] == $nombre ) ;
+
+
+
+function resumenJ ($coleccionPartidas){
+    echo  "ingrese el nombre del jugador";
+    $nom = trim(fgets(STDIN)); 
+    $n=count($coleccionPartidas);
+    $mayorPuntaje = 0;
+    $acum_puntaje = 0;
+    $acum_intentos=0;
+    for ($i=0; $i<$n ;$i++){
+        if ($coleccionPartidas [$i]["jugador"] == $nom ){
+            $puntaje=$coleccionPartidas [$i]["puntaje"];
+            $acum_puntaje= ($acum_puntaje+$puntaje);
+            $intentos=$coleccionPartidas [$i]["intentos"];
+            $acum_intentos= ($acum_intentos + $intentos);
+            if ($puntaje > $mayorPuntaje){
+                $mayorPuntaje = $puntaje;
+            }
+    
+        }
+    }
+    echo "-----------------------------------";
+    echo "nombre del jugador: ".$nom;
+    echo "el puntaje total de ".$nom."es: ".$acum_puntaje;
+    echo "el mayor puntaje en una partida fue de: ".$mayorPuntaje;
+    echo "el total de intentos fue de: ".$acum_intentos;
+    echo "-----------------------------------";
+    
+    
+    }
+      
+    }  
+  
