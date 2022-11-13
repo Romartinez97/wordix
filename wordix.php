@@ -333,59 +333,67 @@ function esIntentoGanado($estruturaPalabraIntento)
  * @return int
  */
 
+
 function obtenerPuntajeWordix($nroIntento, $palabra)
 {
     //int , $puntajeInt, $puntajePalabra, $puntajeTotal, $n
     //array , $arrayPalabra
-    if ($nroIntento == 0)
-    {
-        $puntajeTotal = 0;
-    }
-    if ($nroIntento == 1)
-    {
-        $puntajeInt = 6;
-    }
-    elseif ($nroIntento == 2)
-    {
-        $puntajeInt = 5;
-    }
-    elseif ($nroIntento == 3)
-    {
-        $puntajeInt = 4;
-    }
-    elseif ($nroIntento == 4)
-    {
-        $puntajeInt = 3;
-    }
-    elseif ($nroIntento == 5)
-    {
-        $puntajeInt = 2;
-    }
-    elseif ($nroIntento == 6) 
-    {
-        $puntajeInt = 1;
-    }
-    $arrayPalabra = str_split($palabra);
+    $puntajeTotal = 0;
+    $puntajeIntentos = 0;
     $puntajePalabra = 0;
-    $n = count($arrayPalabra);
-    for ($i=0; $i < $n; $i++) 
+    if ($nroIntento < 7 )
     {
-        if ( $arrayPalabra[$i] == "a"||"e"||"i"||"o"||"u")
+        switch ($nroIntento){
+            case (1):
+                $puntajeIntentos = 6;
+                break;
+            case (2):
+                $puntajeIntentos = 5;
+                break;
+            case (3):
+                $puntajeIntentos = 4;
+                break;
+            case (4):
+                $puntajeIntentos = 3;
+                break;
+            case (5):
+                $puntajeIntentos = 2;
+                break;
+            case (6):
+                $puntajeIntentos = 1;
+                break;
+        }
+    }
+    $nPalabra = strlen($palabra);
+    $vocales = "aeiou";
+    $consonantesM = "bcdfghjklm";
+    $consonantesP = "nñpqrstwxyz";
+    for ($i=0; $i < $nPalabra; $i++) 
+    {
+       for ($j=0; $j < strlen($vocales); $j++) 
+       { 
+        if ($palabra[$i] == $vocales[$j]) 
         {
             $puntajePalabra = $puntajePalabra + 1;
-            
         }
-        elseif ( $arrayPalabra[$i] == "b"||"c"||"d"||"e"||"f"||"g"||"h"||"i"||"j"||"k"||"l"||"m")
+
+       }
+       for ($q=0; $q < strlen($consonantesM) ; $q++) 
+       { 
+        if ($palabra[$i] == $consonantesM[$q]) 
         {
             $puntajePalabra = $puntajePalabra + 2;
         }
-        elseif ($arrayPalabra[$i] == "n"||"ñ"||"o"||"p"||"q"||"r"||"s"||"t"||"u"||"v"||"w"||"x"||"y"||"z") 
+       }
+       for ($r=0; $r < strlen($consonantesP) ; $r++) 
+       { 
+        if ($palabra[$i] == $consonantesP[$r]) 
         {
             $puntajePalabra = $puntajePalabra + 3;
         }
+       }
     }
-
-    $puntajeTotal = $puntajeInt + $puntajePalabra;
+    $puntajeTotal = $puntajeIntentos + $puntajePalabra;
     return $puntajeTotal;
 
 }
