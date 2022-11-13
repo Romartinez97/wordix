@@ -89,7 +89,7 @@ function cargarPartidas()
  * con una letra
  * @return string
  */
-function nombreEnMinusculas()
+function nombreEnMinusculas() //HABRIA QUE APLICARLO A CADA VEZ QUE SE PIDE QUE INGRESE EL NOMBRE DEL JUGADOR
 {
     //array $cadenaJugador
     //string $jugador, $jugadorMinusculas
@@ -167,7 +167,7 @@ function primerPartida($coleccionPartidas)
 }
 
 
-function resumenJ($coleccionPartidas)
+function resumenJ($coleccionPartidas) //VER QUE LO TOMA COMO VARIABLE MIXTA Y NO COMO ARRAY
 {
     echo  "Ingrese el nombre del jugador: ";
     $nombre = trim(fgets(STDIN));
@@ -227,7 +227,21 @@ function resumenJ($coleccionPartidas)
         "intento6" => $en6Intentos
     ];
     return ($resumenJugador);
-    print_r($resumenJugador);
+
+    echo "-----------------------------------\n";
+    echo "Jugador: " . $nombre."\n";
+    echo "Partidas: ". $totalPartidas."\n";
+    echo "El puntaje total de " . $nombre . "es: " . $totalPuntaje."\n";
+    echo "Victorias: ". $totalVictorias."\n";
+    echo "Porcentaje de victorias: ". $porcVictorias."% \n";
+    echo "Adivinadas:\n";
+    echo "  Intento 1: ".$en1Intento."\n";
+    echo "  Intento 2: ".$en2Intentos."\n";
+    echo "  Intento 3: ".$en3Intentos."\n";
+    echo "  Intento 4: ".$en4Intentos."\n";
+    echo "  Intento 5: ".$en5Intentos."\n";
+    echo "  Intento 6: ".$en6Intentos."\n";
+    echo "-----------------------------------";
 }
 
 
