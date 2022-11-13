@@ -246,7 +246,7 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
  * y la palabra que intenta adivinar la palabra wordix.
  * devuelve la estructura de intentos Wordix modificada con el intento.
  * @param string $palabraWordix
- * @param array $estruturaIntentosWordix
+ * @param array $estructuraIntentosWordix
  * @param string $palabraIntento
  * @return array estructura wordix modificada
  */
@@ -269,8 +269,8 @@ function analizarPalabraIntento($palabraWordix, $estructuraIntentosWordix, $pala
         array_push($estructuraPalabraIntento, ["letra" => $letraIntento, "estado" => $estado]);
     }
 
-    array_push($estruturaIntentosWordix, $estructuraPalabraIntento);
-    return $estruturaIntentosWordix;
+    array_push($estructuraIntentosWordix, $estructuraPalabraIntento);
+    return $estructuraIntentosWordix;
 }
 
 /**
@@ -308,7 +308,7 @@ function actualizarTeclado($teclado, $estructuraPalabraIntento)
  * @param array $estructuraPalabraIntento
  * @return bool
  */
-function esIntentoGanado($estruturaPalabraIntento)
+function esIntentoGanado($estructuraPalabraIntento)
 {
     $cantLetras = count($estructuraPalabraIntento);
     $i = 0;
@@ -327,12 +327,11 @@ function esIntentoGanado($estruturaPalabraIntento)
 }
 
 /**
- * Obtine el puntaje de una partida teniendo en cuenta la palabra y el numero de intento
+ * Obtiene el puntaje de una partida teniendo en cuenta la palabra y el numero de intento
  * @param int $nroIntento
  * @param string $palabra
  * @return int
  */
-
 
 function obtenerPuntajeWordix($nroIntento, $palabra)
 {
@@ -341,7 +340,7 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
     $puntajeTotal = 0;
     $puntajeIntentos = 0;
     $puntajePalabra = 0;
-    if ($nroIntento < 7 )
+    if ($nroIntento > 0 && $nroIntento < 7 )
     {
         switch ($nroIntento){
             case (1):
@@ -363,12 +362,11 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
                 $puntajeIntentos = 1;
                 break;
         }
-    }
     $nPalabra = strlen($palabra);
-    $vocales = "aeiou";
-    $consonantesM = "bcdfghjklm";
-    $consonantesP = "nñpqrstwxyz";
-    for ($i=0; $i < $nPalabra; $i++) 
+    $vocales = "AEIOU";
+    $consonantesM = "BCDFGHJKLM";
+    $consonantesP = "NÑPQRSTWXYZ";
+    for ($i=0; $i < $nPalabra; $i++)
     {
        for ($j=0; $j < strlen($vocales); $j++) 
        { 
@@ -395,33 +393,37 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
     }
     $puntajeTotal = $puntajeIntentos + $puntajePalabra;
     return $puntajeTotal;
-
+}
 }
 
 /**
- * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
+ * Dada un número de palabra a adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
  * @param string $palabraWordix
  * @param string $nombreUsuario
  * @return array estructura con el resumen de la partida, para poder ser utilizada en estadísticas.
  */
-function jugarWordix($palabraWordix, $nombreUsuario)
+function jugarOpcion1($numeroPalabra, $nombreUsuario)
 {
     /*Inicialización*/
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
     escribirMensajeBienvenida($nombreUsuario);
     $nroIntento = 1;
+    $coleccionPalabras= cargarColeccionPalabras();
+    $coleccionPartidas = cargarPartidas(); //VER ESTO, SE RESETEA LA COLECCION DE PARTIDAS CADA VEZ QUE ENTRA EN LA OPCIÓN 1
     do {
-
         echo "Comenzar con el Intento " . $nroIntento . ":\n";
-        $palabraIntento = leerPalabra5Letras();
+        $palabraWordix = $coleccionPalabras[$numeroPalabra-1];
         $indiceIntento = $nroIntento - 1;
+        imprimirIntentosWordix($arregloDeIntentosWordix);
+        escribirTeclado($teclado);
+        $palabraIntento = strtoupper(trim(fgets(STDIN)));
         $arregloDeIntentosWordix = analizarPalabraIntento($palabraWordix, $arregloDeIntentosWordix, $palabraIntento);
         $teclado = actualizarTeclado($teclado, $arregloDeIntentosWordix[$indiceIntento]);
         /*Mostrar los resultados del análisis: */
         imprimirIntentosWordix($arregloDeIntentosWordix);
         escribirTeclado($teclado);
-        /*Determinar si la plabra intento ganó e incrementar la cantidad de intentos */
+        /*Determinar si la palabra intento ganó e incrementar la cantidad de intentos */
 
         $ganoElIntento = esIntentoGanado($arregloDeIntentosWordix[$indiceIntento]);
         $nroIntento++;
@@ -430,177 +432,79 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
     if ($ganoElIntento) {
         $nroIntento--;
-        $puntaje = obtenerPuntajeWordix();
+        $puntaje = obtenerPuntajeWordix($nroIntento,$palabraWordix);
         echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
     } else {
         $nroIntento = 0; //reset intento
         $puntaje = 0;
         echo "Seguí Jugando Wordix, la próxima será! ";
     }
-
-    $partida = [
-        "palabraWordix" => $palabraWordix,
-        "jugador" => $nombreUsuario,
-        "intentos" => $nroIntento,
-        "puntaje" => $puntaje
-    ];
-
+    $partida = []; 
+    $partida ["palabraWordix"] = $palabraIntento;
+    $partida ["jugador"] = $nombreUsuario;
+    $partida ["intentos"] = $nroIntento;
+    $partida ["puntaje"] = $puntaje;
+    print_r($partida);
+    
+    array_push($coleccionPartidas,$partida);
+    print_r($coleccionPartidas);
     return $partida;
-}
-/**
- * funcion encargada de imprimir el menú de opciones con el que el usuario va a interactuar
- * funcion sin parametros actuales, devuelve un valor entero necesario para las otras funciones
- * @return int
- */
-function seleccionarOpcion(){
-
-    //ACA VA A IMPRIMIR EL MENU DE OPCIONES
-    
-    echo "\n -------- MENÚ DE OPCIONES--------\n";
-    echo "\n   1) Jugar al Wordix con una palabra elegida";
-    echo "\n   2) Jugar al Wordix con una palabra aleatoria";
-    echo "\n   3) Mostrar una partida";
-    echo "\n   4) Mostrar la primer partida ganadora";
-    echo "\n   5) Mostrar resumen de jugador";
-    echo "\n   6) Mostrar listado de partidas ordenadas por jugador y palabra";
-    echo "\n   7) Agregar una palabra de 5 letras a Wordix";
-    echo "\n   8) Salir\n";
-    
-    do {
-        echo "\nIngrese un número del 1 al 8 para elegir la opción: ";
-        $opcion = trim(fgets(STDIN));
-        if ($opcion <= 0 || $opcion > 8){
-            echo "\n¡VALOR NO VALIDO! Por favor ingrese un número valido\n";
-        }
-    } while ($opcion <= 0 || $opcion > 8);
-    
-    return $opcion;
+    return $coleccionPartidas;
 }
 
 /**
- * Inicializa una colección de partidas
- * @return array
+ * Dada una palabra al azar, juega una partida de wordix intentando que el usuario adivine la palabra.
+ * @param string $palabraWordix
+ * @param string $nombreUsuario
+ * @return array estructura con el resumen de la partida, para poder ser utilizada en estadísticas.
  */
-function cargarPartidas()
+function jugarOpcion2($nombreUsuario)
 {
-    $coleccionPartidas = [];
-    $coleccionPartidas[0] = ["palabraWordix" => "QUESO","jugador" => "Juan", "intentos" => 1, "puntaje" => 15];
-    $coleccionPartidas[1] = ["palabraWordix" => "RASGO","jugador" => "Maria", "intentos" => 2, "puntaje" => 14];
-    $coleccionPartidas[2] = ["palabraWordix" => "GATOS","jugador" => "Pedro", "intentos" => 3, "puntaje" => 14];
-    $coleccionPartidas[3] = ["palabraWordix" => "MUJER","jugador" => "Juan", "intentos" => 4, "puntaje" => 12];
-    $coleccionPartidas[4] = ["palabraWordix" => "FUEGO","jugador" => "Pablo", "intentos" => 5, "puntaje" => 9];
-    $coleccionPartidas[5] = ["palabraWordix" => "CASAS","jugador" => "Juan", "intentos" => 7, "puntaje" => 0];
-    $coleccionPartidas[6] = ["palabraWordix" => "GOTAS","jugador" => "Ana", "intentos" => 2, "puntaje" => 15];
-    $coleccionPartidas[7] = ["palabraWordix" => "HUEVO","jugador" => "Juan", "intentos" => 6, "puntaje" => 8];
-    $coleccionPartidas[8] = ["palabraWordix" => "CASAS","jugador" => "Carlos", "intentos" => 7, "puntaje" => 0];
-    $coleccionPartidas[9] = ["palabraWordix" => "ZORRO","jugador" => "Carlos", "intentos" => 2, "puntaje" => 16];  
- 
-    return ($coleccionPartidas);
-}
+    /*Inicialización*/
+    $arregloDeIntentosWordix = [];
+    $teclado = iniciarTeclado();
+    escribirMensajeBienvenida($nombreUsuario);
+    $nroIntento = 1;
+    $coleccionPalabras= cargarColeccionPalabras();
+    $numeroPalabra = rand(0,count($coleccionPalabras));
+    $coleccionPartidas = cargarPartidas(); //VER ESTO, SE RESETEA LA COLECCION DE PARTIDAS CADA VEZ QUE ENTRA EN LA OPCIÓN 1
+    do {
+        echo "Comenzar con el Intento " . $nroIntento . ":\n";
+        $palabraWordix = $coleccionPalabras[$numeroPalabra];
+        $indiceIntento = $nroIntento - 1;
+        imprimirIntentosWordix($arregloDeIntentosWordix);
+        escribirTeclado($teclado);
+        $palabraIntento = strtoupper(trim(fgets(STDIN)));
+        $arregloDeIntentosWordix = analizarPalabraIntento($palabraWordix, $arregloDeIntentosWordix, $palabraIntento);
+        $teclado = actualizarTeclado($teclado, $arregloDeIntentosWordix[$indiceIntento]);
+        /*Mostrar los resultados del análisis: */
+        imprimirIntentosWordix($arregloDeIntentosWordix);
+        escribirTeclado($teclado);
+        /*Determinar si la palabra intento ganó e incrementar la cantidad de intentos */
 
-/**
- * Escribe el nombre de un jugador en minúsculas, asegurando que el nombre empiece
- * con una letra
- * @return string
- */
-function nombreEnMinusculas(){
-    //array $cadenaJugador
-    //string $jugador, $jugadorMinusculas
-    $cadenaJugador = [];
-    $jugadorMinusculas = "";
-    echo "Ingrese el nombre del jugador: ";
-    $jugador = trim(fgets(STDIN));
-    $cadenaJugador = str_split ($jugador);
-    while (!(ctype_alpha($cadenaJugador[0]))){
-        echo "El nombre no empieza con una letra, ingrese un nombre válido (debe empezar con una letra).";
-        $jugador = trim(fgets(STDIN));
-        $cadenaJugador = str_split ($jugador);
+        $ganoElIntento = esIntentoGanado($arregloDeIntentosWordix[$indiceIntento]);
+        $nroIntento++;
+    } while ($nroIntento <= CANT_INTENTOS && !$ganoElIntento);
+
+
+    if ($ganoElIntento) {
+        $nroIntento--;
+        $puntaje = obtenerPuntajeWordix($nroIntento,$palabraWordix);
+        echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
+    } else {
+        $nroIntento = 0; //reset intento
+        $puntaje = 0;
+        echo "Seguí Jugando Wordix, la próxima será! ";
     }
-    $jugadorMinusculas = strtolower ($jugador);
-    return $jugadorMinusculas;
+    $partida = []; 
+    $partida ["palabraWordix"] = $palabraIntento;
+    $partida ["jugador"] = $nombreUsuario;
+    $partida ["intentos"] = $nroIntento;
+    $partida ["puntaje"] = $puntaje;
+    print_r($partida);
+    
+    array_push($coleccionPartidas,$partida);
+    print_r($coleccionPartidas);
+    return $partida;
+    return $coleccionPartidas;
 }
-/**
- * funcion sin retorno que según el usuario, va a devolver los datos de la partida seleccionada de la coleccion de partidas
- * @param array $coleccionPartidas
- * @param int $num
- */
-function mostrarPartida($coleccionPartidas, $num){
-    // int $valorLimite
-    $valorLimite = count ($coleccionPartidas);
-        if (($num) <= $valorLimite){
-            echo "PARTIDA Wordix número ".($num)." : palabra ". $coleccionPartidas[($num-1)]["palabraWordix"]."\n";
-            echo    "Jugador: ".$coleccionPartidas[($num-1)]["jugador"]."\n";
-            echo "Puntaje: ".$coleccionPartidas[($num-1)]["puntaje"]."\n";
-            if ($coleccionPartidas[($num-1)]["puntaje"] > 0){
-                echo "Intento: Adivino la palabra en ".$coleccionPartidas[($num-1)]["intentos"]." intentos\n";
-            }else{
-                echo "No adivino la palabra";
-            }
-        
-        }
-}
-/**
- * funcion encargada de actualizar la estructura $coleccionPalabras cada vez que se añade una nueva palabra
- * @param array $coleccionPalabras
- * @return array
- 
-*/
-function agregarPalabra ($array){
-    // string $palabra
-    $cantElementos = count ($array);
-    echo "Ingrese la palabra a añadir: ";
-    $palabra = trim(fgets(STDIN));
-    $array [$cantElementos] = $palabra;
-    return $array;
-    
-}
-
-function primerPartida ($coleccionPartidas){
-$i=-1;
-echo  "ingrese el nombre del jugador";
-$nombre = trim(fgets(STDIN));
-do {
-$i++;
-    if ($coleccionPartidas [$i]["jugador"] == $nombre && $coleccionPartidas [$i]["puntaje"] > 0){
-
-        echo "el indice de la primera partida ganada es: ",$i;
-    } 
-    else if ($coleccionPartidas [$i]["jugador"] == $nombre && $coleccionPartidas [$i]["puntaje"] <= 0){
-        echo "-1";
-    }
-    
-}  while ($coleccionPartidas [$i]["jugador"] == $nombre ) ;
-
-
-
-function resumenJ ($coleccionPartidas){
-    echo  "ingrese el nombre del jugador";
-    $nom = trim(fgets(STDIN)); 
-    $n=count($coleccionPartidas);
-    $mayorPuntaje = 0;
-    $acum_puntaje = 0;
-    $acum_intentos=0;
-    for ($i=0; $i<$n ;$i++){
-        if ($coleccionPartidas [$i]["jugador"] == $nom ){
-            $puntaje=$coleccionPartidas [$i]["puntaje"];
-            $acum_puntaje= ($acum_puntaje+$puntaje);
-            $intentos=$coleccionPartidas [$i]["intentos"];
-            $acum_intentos= ($acum_intentos + $intentos);
-            if ($puntaje > $mayorPuntaje){
-                $mayorPuntaje = $puntaje;
-            }
-    
-        }
-    }
-    echo "-----------------------------------";
-    echo "nombre del jugador: ".$nom;
-    echo "el puntaje total de ".$nom."es: ".$acum_puntaje;
-    echo "el mayor puntaje en una partida fue de: ".$mayorPuntaje;
-    echo "el total de intentos fue de: ".$acum_intentos;
-    echo "-----------------------------------";
-    
-    
-    }
-      
-    }  
-  
