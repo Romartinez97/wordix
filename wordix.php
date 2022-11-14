@@ -410,7 +410,6 @@ function jugarOpcion1($numeroPalabra, $nombreUsuario)
     escribirMensajeBienvenida($nombreUsuario);
     $nroIntento = 1;
     $coleccionPalabras= cargarColeccionPalabras();
-    $coleccionPartidas = cargarPartidas(); //VER ESTO, SE RESETEA LA COLECCION DE PARTIDAS CADA VEZ QUE ENTRA EN LA OPCIÓN 1
     do {
         echo "Comenzar con el Intento " . $nroIntento . ":\n";
         $palabraWordix = $coleccionPalabras[$numeroPalabra-1];
@@ -447,6 +446,15 @@ function jugarOpcion1($numeroPalabra, $nombreUsuario)
     print_r($partida);
     
     array_push($coleccionPartidas,$partida);
+    /*
+    Dice que no está inicializado el arreglo.
+    PHP Fatal error:  Uncaught TypeError: array_push(): Argument #1 ($array) must be of type array, null given in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\wordix.php:449
+Stack trace:
+#0 C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\wordix.php(449): array_push()
+#1 C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php(354): jugarOpcion1()
+#2 {main}
+  thrown in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\wordix.php on line 449
+  */
     print_r($coleccionPartidas);
     return $partida;
     return $coleccionPartidas;
