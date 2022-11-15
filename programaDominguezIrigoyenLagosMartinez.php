@@ -182,7 +182,7 @@ function primerGanadora ($coleccionPartidas){
  * @param array $coleccionPalabras
  * @return array
  */
-function agregarPalabra($coleccionPalabras) //NO AGREGA NADA
+function agregarPalabra($coleccionPalabras) 
 {
     //string $palabra
     $palabra = leerPalabra5Letras();
@@ -404,7 +404,6 @@ do {
             break;
         case 7:
             //Agregar una palabra nueva
-            //agregarPalabra($coleccionPalabras);
             $palabra = agregarPalabra($coleccionPalabras);
             array_push($coleccionPalabras, $palabra);
             print_r($coleccionPalabras);
