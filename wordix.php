@@ -396,20 +396,20 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
 }
 }
 
+
 /**
  * Dada un número de palabra a adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
  * @param string $palabraWordix
  * @param string $nombreUsuario
  * @return array estructura con el resumen de la partida, para poder ser utilizada en estadísticas.
  */
-function jugarPartida($numero, $nombre, $coleccion)
+function jugarPartida($numero, $nombre, $coleccionPalabras)
 {
     /*Inicialización*/
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
     escribirMensajeBienvenida($nombre);
     $nroIntento = 1;
-    $coleccionPalabras=cargarColeccionPalabras();
     do {
         echo "Comenzar con el Intento " . $nroIntento . ":\n";
         $palabraWordix = $coleccionPalabras[$numero-1];
@@ -444,4 +444,5 @@ function jugarPartida($numero, $nombre, $coleccion)
     $partida ["intentos"] = $nroIntento;
     $partida ["puntaje"] = $puntaje;
     print_r($partida);
+    return($partida);
 }
