@@ -335,8 +335,8 @@ function esIntentoGanado($estructuraPalabraIntento)
 
 function obtenerPuntajeWordix($nroIntento, $palabra)
 {
-    //int , $puntajeInt, $puntajePalabra, $puntajeTotal, $n
-    //array , $arrayPalabra
+    //int , $puntajeIntentos, $puntajePalabra, $puntajeTotal, $nPalabra
+    //string $vocales, $consonantesM, $consonantesP
     $puntajeTotal = 0;
     $puntajeIntentos = 0;
     $puntajePalabra = 0;
@@ -405,7 +405,10 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
  */
 function jugarPartida($numero, $nombre, $coleccionPalabras)
 {
-    /*Inicialización*/
+    //string $palabraWordix, $palabraIntento
+    //int $nroIntento, $indiceIntento, $puntaje
+    //array $arregloDeIntentosWordix, $teclado, $partida
+    //bool $ganoElIntento
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
     escribirMensajeBienvenida($nombre);

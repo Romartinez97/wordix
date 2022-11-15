@@ -53,8 +53,7 @@ function cargarColeccionPalabras()
  */
 function seleccionarOpcion()
 {
-
-    //ACA VA A IMPRIMIR EL MENU DE OPCIONES
+//int $opcion
 
     echo "\n -------- MENÚ DE OPCIONES--------\n";
     echo "\n   1) Jugar al Wordix con una palabra elegida";
@@ -83,6 +82,7 @@ function seleccionarOpcion()
  */
 function cargarPartidas()
 {
+    //array $coleccionPartidas
     $coleccionPartidas = [];
     $coleccionPartidas[0] = ["palabraWordix" => "QUESO", "jugador" => "juan", "intentos" => 1, "puntaje" => 15];
     $coleccionPartidas[1] = ["palabraWordix" => "RASGO", "jugador" => "maria", "intentos" => 2, "puntaje" => 14];
@@ -146,6 +146,8 @@ function mostrarPartida($coleccionPartidas, $num)
 
 function primerGanadora($coleccionPartidas)
 {
+    //string $nom
+    //int $n, $i, $corte
     $nom = nombreEnMinusculas();
     $n = count($coleccionPartidas);
     $i = 0;
@@ -178,6 +180,7 @@ function primerGanadora($coleccionPartidas)
 function agregarPalabra($coleccion)
 {
     //string $palabra
+    //int $i
     $palabra = leerPalabra5Letras();
     $i = 0;
     while (($i < count($coleccion))) {
@@ -194,7 +197,6 @@ function agregarPalabra($coleccion)
 /**
  * Arroja el resumen de un jugador ingresado por el usuario
  * @param array $coleccion
- * @return NULL
  */
 function resumenJ($coleccion)
 {
@@ -290,7 +292,7 @@ function resumenJ($coleccion)
 
 
 /**
- * Funcion para comparar
+ * Funcion para comparar al usar uasort
  * @param int $a, $b
  * @return int
  */
@@ -312,7 +314,6 @@ function comparar($a, $b)
 /**
  * Ordena una coleccion de partidas por nombre de jugador y por palabra
  * @param array $coleccion
- * @return array
  */
 function ordenarColeccion($coleccion)
 {
@@ -330,8 +331,8 @@ function ordenarColeccion($coleccion)
 
 /*
 *Declaración de variables
-*string $nombreJugador, 
-*int $opcion, $numeroPalabra, $numeroPartida,
+*string $nombreJugador, $palabra
+*int $opcion, $numeroPalabra, $partida, $numeroPartida,
 */
 
 //Inicialización de variables:
