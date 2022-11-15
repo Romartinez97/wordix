@@ -184,12 +184,10 @@ function primerGanadora ($coleccionPartidas){
  */
 function agregarPalabra($coleccionPalabras) //NO AGREGA NADA
 {
-    // string $palabra
-    $cantElementos = count($coleccionPalabras);
+    //string $palabra
     $palabra = leerPalabra5Letras();
-    array_push($coleccionPalabras, $palabra);
-    return $coleccionPalabras;
-    print_r($coleccionPalabras);
+    $coleccionPalabras = array($palabra);
+    return $palabra;
 }
 
 function primerPartida($coleccionPartidas)
@@ -406,7 +404,9 @@ do {
             break;
         case 7:
             //Agregar una palabra nueva
-            agregarPalabra($coleccionPalabras);
+            //agregarPalabra($coleccionPalabras);
+            $palabra = agregarPalabra($coleccionPalabras);
+            array_push($coleccionPalabras, $palabra);
             print_r($coleccionPalabras);
             break;
     }
