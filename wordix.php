@@ -444,5 +444,5 @@ function jugarPartida($numero, $nombre, $coleccionPalabras)
     $partida ["intentos"] = $nroIntento;
     $partida ["puntaje"] = $puntaje;
     print_r($partida);
-    return($partida);
+    return $partida;
 }
