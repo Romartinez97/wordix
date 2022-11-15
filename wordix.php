@@ -402,17 +402,17 @@ function obtenerPuntajeWordix($nroIntento, $palabra)
  * @param string $nombreUsuario
  * @return array estructura con el resumen de la partida, para poder ser utilizada en estadísticas.
  */
-function jugarOpcion1($numeroPalabra, $nombreUsuario)
+function jugarPartida($numero, $nombre, $coleccion)
 {
     /*Inicialización*/
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
-    escribirMensajeBienvenida($nombreUsuario);
+    escribirMensajeBienvenida($nombre);
     $nroIntento = 1;
-    $coleccionPalabras= cargarColeccionPalabras();
+    $coleccionPalabras=cargarColeccionPalabras();
     do {
         echo "Comenzar con el Intento " . $nroIntento . ":\n";
-        $palabraWordix = $coleccionPalabras[$numeroPalabra-1];
+        $palabraWordix = $coleccionPalabras[$numero-1];
         $indiceIntento = $nroIntento - 1;
         imprimirIntentosWordix($arregloDeIntentosWordix);
         escribirTeclado($teclado);
@@ -440,79 +440,8 @@ function jugarOpcion1($numeroPalabra, $nombreUsuario)
     }
     $partida = []; 
     $partida ["palabraWordix"] = $palabraIntento;
-    $partida ["jugador"] = $nombreUsuario;
+    $partida ["jugador"] = $nombre;
     $partida ["intentos"] = $nroIntento;
     $partida ["puntaje"] = $puntaje;
     print_r($partida);
-    
-    array_push($coleccionPartidas,$partida);
-    /*
-    Dice que no está inicializado el arreglo.
-    PHP Fatal error:  Uncaught TypeError: array_push(): Argument #1 ($array) must be of type array, null given in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\wordix.php:449
-Stack trace:
-#0 C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\wordix.php(449): array_push()
-#1 C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php(354): jugarOpcion1()
-#2 {main}
-  thrown in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\wordix.php on line 449
-  */
-    print_r($coleccionPartidas);
-    return $partida;
-    return $coleccionPartidas;
-}
-
-/**
- * Dada una palabra al azar, juega una partida de wordix intentando que el usuario adivine la palabra.
- * @param string $palabraWordix
- * @param string $nombreUsuario
- * @return array estructura con el resumen de la partida, para poder ser utilizada en estadísticas.
- */
-function jugarOpcion2($nombreUsuario)
-{
-    /*Inicialización*/
-    $arregloDeIntentosWordix = [];
-    $teclado = iniciarTeclado();
-    escribirMensajeBienvenida($nombreUsuario);
-    $nroIntento = 1;
-    $coleccionPalabras= cargarColeccionPalabras();
-    $numeroPalabra = rand(0,count($coleccionPalabras));
-    $coleccionPartidas = cargarPartidas(); //VER ESTO, SE RESETEA LA COLECCION DE PARTIDAS CADA VEZ QUE ENTRA EN LA OPCIÓN 1
-    do {
-        echo "Comenzar con el Intento " . $nroIntento . ":\n";
-        $palabraWordix = $coleccionPalabras[$numeroPalabra];
-        $indiceIntento = $nroIntento - 1;
-        imprimirIntentosWordix($arregloDeIntentosWordix);
-        escribirTeclado($teclado);
-        $palabraIntento = strtoupper(trim(fgets(STDIN)));
-        $arregloDeIntentosWordix = analizarPalabraIntento($palabraWordix, $arregloDeIntentosWordix, $palabraIntento);
-        $teclado = actualizarTeclado($teclado, $arregloDeIntentosWordix[$indiceIntento]);
-        /*Mostrar los resultados del análisis: */
-        imprimirIntentosWordix($arregloDeIntentosWordix);
-        escribirTeclado($teclado);
-        /*Determinar si la palabra intento ganó e incrementar la cantidad de intentos */
-
-        $ganoElIntento = esIntentoGanado($arregloDeIntentosWordix[$indiceIntento]);
-        $nroIntento++;
-    } while ($nroIntento <= CANT_INTENTOS && !$ganoElIntento);
-
-
-    if ($ganoElIntento) {
-        $nroIntento--;
-        $puntaje = obtenerPuntajeWordix($nroIntento,$palabraWordix);
-        echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
-    } else {
-        $nroIntento = 0; //reset intento
-        $puntaje = 0;
-        echo "Seguí Jugando Wordix, la próxima será! ";
-    }
-    $partida = []; 
-    $partida ["palabraWordix"] = $palabraIntento;
-    $partida ["jugador"] = $nombreUsuario;
-    $partida ["intentos"] = $nroIntento;
-    $partida ["puntaje"] = $puntaje;
-    print_r($partida);
-    
-    array_push($coleccionPartidas,$partida);
-    print_r($coleccionPartidas);
-    return $partida;
-    return $coleccionPartidas;
 }

@@ -131,13 +131,8 @@ function mostrarPartida($coleccionPartidas, $num)
     // int $valorLimite
     $valorLimite = count($coleccionPartidas);
     while ($num < 0  || $num > $valorLimite) {
-        if ($num = -1) {
-            echo "No hay ninguna partida ganada.";
-            break;
-        } else {
-            echo "El número de partida ingresado no existe, intente nuevamente: ";
-            $num = trim(fgets(STDIN));
-        }
+        echo "El número de partida ingresado no existe, intente nuevamente: ";
+        $num = trim(fgets(STDIN));
     }
     echo "PARTIDA Wordix número " . ($num) . " : palabra " . $coleccionPartidas[($num - 1)]["palabraWordix"] . "\n";
     echo    "Jugador: " . $coleccionPartidas[($num - 1)]["jugador"] . "\n";
@@ -158,89 +153,47 @@ function primerGanadora ($coleccionPartidas){
         if (($coleccionPartidas[$i]["jugador"] == $nom) && ($coleccionPartidas[$i]["puntaje"] > 0 )){
             $corte = $corte +1;
             echo "================================================="."\n";
-            echo "jugador: ".$nom."\n";
-            echo "partida WORDIX N: ".($i+1)." palabra: ".$coleccionPartidas[$i]["palabraWordix"]."\n";
-            echo "el puntaje del jugador es: ".$coleccionPartidas[$i]["puntaje"]."\n";
-            echo "intento: Adivino la palabra en ".$coleccionPartidas[$i]["intentos"]." intentos"."\n";
+            echo "Partida WORDIX ".($i+1).": palabra ".$coleccionPartidas[$i]["palabraWordix"]."\n";
+            echo "Jugador: ".$nom."\n";
+            echo "Puntaje: ".$coleccionPartidas[$i]["puntaje"]."\n";
+            echo "Intento: Adivino la palabra en ".$coleccionPartidas[$i]["intentos"]." intentos"."\n";
             echo "================================================="."\n";
          } else if (($coleccionPartidas[$i]["jugador"] == $nom) && ($coleccionPartidas[$i]["puntaje"] == 0 )){
             $corte = $corte +1;
-            echo "el jugador ".$nom." no gano ninguna partida ;("."\n";
+            echo "El jugador ".$nom." no gano ninguna partida ;("."\n";
         }
         $i = $i + 1;
         
     }
     if ($corte == 0){
-        echo "no existe el jugador";
+        echo "No existe el jugador.\n";
     }
-    
 } 
-
 
 /**
  * funcion encargada de actualizar la estructura $coleccionPalabras cada vez que se añade una nueva palabra
  * @param array $coleccionPalabras
  * @return array
  */
-function agregarPalabra($coleccionPalabras) 
+function agregarPalabra() 
 {
     //string $palabra
     $palabra = leerPalabra5Letras();
-    $coleccionPalabras = array($palabra);
+    //hacer un for para que no se repita la palabra nueva
     return $palabra;
 }
 
-function primerPartida($coleccionPartidas)
-/*Ingrese el nombre del jugador: Carlos
-PHP Warning:  Undefined array key 10 in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php on line 182
-PHP Warning:  Trying to access array offset on value of type null in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php on line 182
-PHP Warning:  Undefined array key 10 in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php on line 182
-PHP Warning:  Trying to access array offset on value of type null in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php on line 182
-El jugador carlos no jugó ninguna partida.PARTIDA Wordix número 10 : palabra ZORRO
-Jugador: carlos
-Puntaje: 0
-No adivino la palabra
-*/
+/**
+ * Arroja el resumen de un jugador ingresado por el usuario
+ * @param array $coleccion
+ * @return NULL
+ */
+function resumenJ($coleccion)
 {
-    $nombre = nombreEnMinusculas();
-    $i = -1;
-    $puntajePartida = 0;
-    $jugador = "";
-    $limite = count($coleccionPartidas);
-    do {
-        $i++;
-    } while ($i < $limite && ($coleccionPartidas[$i]["jugador"] != $nombre || $coleccionPartidas[$i]["puntaje"] <= 0));
-
-    if ($coleccionPartidas[$i]["jugador"] == $nombre || $coleccionPartidas[$i]["puntaje"] > 0) {
-        $puntajePartida = $coleccionPartidas[$i]["puntaje"];
-        $jugador = $coleccionPartidas[$i]["jugador"];
-    }
-    if ($puntajePartida = 0) {
-        echo "El jugador " . $nombre . " no ganó ninguna partida.";
-    }
-    if ($jugador == "") {
-        echo "El jugador " . $nombre . " no jugó ninguna partida.";
-    }
-    if ($puntajePartida = 0 && $jugador == "") {
-        $i = -1;
-    }
-    return $i;
-}
-
-
-function resumenJ($coleccionPartidas)
-//VER QUE LO TOMA COMO VARIABLE MIXTA Y NO COMO ARRAY
-/*
-Ingrese el nombre del jugador: Juan
-PHP Fatal error:  Uncaught TypeError: Illegal offset type in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php:222
-Stack trace:
-#0 C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php(360): resumenJ()
-#1 {main}
-  thrown in C:\Users\Rodrigo\Desktop\TP final\TP final php\wordix\programaDominguezIrigoyenLagosMartinez.php on line 222
-*/
-{
+    //string $nombre
+    //int $totalPartidas, $totalPuntaje, $totalVictorias, $en1Intento, $en2Intentos, $en3Intentos, $en4Intentos, $en5Intentos, $en6Intentos, $i, $intentos
     echo  "Ingrese el nombre del jugador: ";
-    $nombre = trim(fgets(STDIN));
+    $nombre = nombreEnMinusculas();
     $totalPartidas = 0;
     $totalPuntaje = 0;
     $totalVictorias = 0;
@@ -252,14 +205,14 @@ Stack trace:
     $en6Intentos = 0;
     $i = 0;
     $intentos = 0;
-    foreach ($coleccionPartidas as $i) {
-        if (($coleccionPartidas[$i]["nombre"]) == $nombre) {
+    foreach ($coleccion as $i) {
+        if (($coleccion[$i]["nombre"]) == $nombre) {
             $totalPartidas = $totalPartidas + 1;
-            if (($coleccionPartidas[$i]["puntaje"]) > 0) {
-                $totalPuntaje = $totalPuntaje + $coleccionPartidas[$i]["puntaje"];
+            if (($coleccion[$i]["puntaje"]) > 0) {
+                $totalPuntaje = $totalPuntaje + $coleccion[$i]["puntaje"];
                 $totalVictorias = $totalVictorias + 1;
             }
-            $intentos = $coleccionPartidas[$i]["intentos"];
+            $intentos = $coleccion[$i]["intentos"];
             switch ($intentos) {
                 case (1):
                     $en1Intento = $en1Intento + 1;
@@ -300,7 +253,6 @@ Stack trace:
         "intento5" => $en5Intentos,
         "intento6" => $en6Intentos
     ];
-    return ($resumenJugador);
 
     echo "-----------------------------------\n";
     echo "Jugador: " . $nombre . "\n";
@@ -376,13 +328,18 @@ do {
             //Jugar al Wordix con una palabra elegida
             $nombreJugador = nombreEnMinusculas();
             echo "Elegir un número: ";
-            $numeroPalabra = trim(fgets(STDIN));
-            jugarOpcion1($numeroPalabra, $nombreJugador);
+            $numeroPalabra = solicitarNumeroEntre(0, count($coleccionPalabras));
+            $partida = jugarPartida($numeroPalabra, $nombreJugador, $coleccionPartidas);
+            array_push($coleccionPartidas,$partida);
+            print_r($coleccionPartidas);
             break;
         case 2:
             //Jugar al Wordix con una palabra al azar
             $nombreJugador = nombreEnMinusculas();
-            jugarOpcion2($nombreJugador);
+            $numeroPalabra = rand(0, count($coleccionPalabras));
+            $partida = jugarPartida($numeroPalabra, $nombreJugador, $coleccionPartidas);
+            array_push($coleccionPartidas,$partida);
+            print_r($coleccionPartidas);
             break;
         case 3:
             //Mostrar una partida
