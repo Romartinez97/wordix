@@ -149,6 +149,34 @@ function mostrarPartida($coleccionPartidas, $num)
     }
 }
 
+function primerGanadora ($coleccionPartidas){
+    $nom = nombreEnMinusculas();
+    $n = count($coleccionPartidas);
+    $i=0;
+    $corte = 0;
+    while (($i< $n) && ($corte == 0)){ 
+        if (($coleccionPartidas[$i]["jugador"] == $nom) && ($coleccionPartidas[$i]["puntaje"] > 0 )){
+            $corte = $corte +1;
+            echo "================================================="."\n";
+            echo "jugador: ".$nom."\n";
+            echo "partida WORDIX N: ".($i+1)." palabra: ".$coleccionPartidas[$i]["palabraWordix"]."\n";
+            echo "el puntaje del jugador es: ".$coleccionPartidas[$i]["puntaje"]."\n";
+            echo "intento: Adivino la palabra en ".$coleccionPartidas[$i]["intentos"]." intentos"."\n";
+            echo "================================================="."\n";
+         } else if (($coleccionPartidas[$i]["jugador"] == $nom) && ($coleccionPartidas[$i]["puntaje"] == 0 )){
+            $corte = $corte +1;
+            echo "el jugador ".$nom." no gano ninguna partida ;("."\n";
+        }
+        $i = $i + 1;
+        
+    }
+    if ($corte == 0){
+        echo "no existe el jugador";
+    }
+    
+} 
+
+
 /**
  * funcion encargada de actualizar la estructura $coleccionPalabras cada vez que se añade una nueva palabra
  * @param array $coleccionPalabras
@@ -366,8 +394,7 @@ do {
             break;
         case 4:
             //Mostrar la primer partida ganadora
-            $numeroPartida = primerPartida($coleccionPartidas);
-            mostrarPartida($coleccionPartidas, $numeroPartida);
+            primerGanadora($coleccionPartidas);
             break;
         case 5:
             //Mostrar el resumen de un jugador
@@ -382,7 +409,6 @@ do {
             agregarPalabra($coleccionPalabras);
             print_r($coleccionPalabras);
             break;
-            seleccionarOpcion();
     }
 } while ($opcion != 8);
 echo "FIN DEL PROGRAMA";
