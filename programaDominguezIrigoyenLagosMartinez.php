@@ -349,7 +349,6 @@ do {
             echo "Elegir un número: ";
             $numeroPalabra = solicitarNumeroEntre(0, count($coleccionPalabras));
             $partida = jugarPartida($numeroPalabra, $nombreJugador, $coleccionPalabras);
-            print_r($partida);
             array_push($coleccionPartidas, $partida);
             break;
         case 2:
