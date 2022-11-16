@@ -383,4 +383,4 @@ do {
             break;
     }
 } while ($opcion != 8);
-echo "FIN DEL PROGRAMA";
+echo "FIN DEL PROGRAMA\n";
