@@ -419,7 +419,7 @@ function jugarPartida($numero, $nombre, $coleccionPalabras)
         $indiceIntento = $nroIntento - 1;
         imprimirIntentosWordix($arregloDeIntentosWordix);
         escribirTeclado($teclado);
-        $palabraIntento = strtoupper(trim(fgets(STDIN)));
+        $palabraIntento = strtoupper(leerPalabra5Letras());
         $arregloDeIntentosWordix = analizarPalabraIntento($palabraWordix, $arregloDeIntentosWordix, $palabraIntento);
         $teclado = actualizarTeclado($teclado, $arregloDeIntentosWordix[$indiceIntento]);
         /*Mostrar los resultados del análisis: */
