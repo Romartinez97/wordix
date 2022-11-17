@@ -293,22 +293,24 @@ function resumenJ($coleccion)
 
 /**
  * Funcion para comparar al usar uasort
- * @param int $a, $b
+ * @param array $partidaUno, $partidaDos
  * @return int
  */
 
 function comparar($a, $b)
+    //int $variableRetorno
 {
-    if ($a['jugador'] < $b['jugador']) {
-        return -1;
-    } else if ($a['jugador'] > $b['jugador']) {
-        return 1;
+    if ($partidaUno['jugador'] < $partidaDos['jugador']) {
+        $variableRetorno = -1;
+    } else if ($patidaUno['jugador'] > $partidaDos['jugador']) {
+        $variableRetorno = 1;
     }
-    if ($a['palabraWordix'] < $b['palabraWordix']) {
-        return -1;
-    } else if ($a['palabraWordix'] > $b['palabraWordix']) {
-        return 1;
+    if ($partidaUno['palabraWordix'] < $partidaDos['palabraWordix']) {
+        $variableRetorno = -1;
+    } else if ($partidaUno['palabraWordix'] > $partidaDos['palabraWordix']) {
+        $variableRetorno = 1;
     }
+    return $variableRetorno;
 }
 
 /**
