@@ -297,12 +297,12 @@ function resumenJ($coleccion)
  * @return int
  */
 
-function comparar($apartidaUno, $partidaDos)
+function comparar($partidaUno, $partidaDos)
     //int $variableRetorno
 {
     if ($partidaUno['jugador'] < $partidaDos['jugador']) {
         $variableRetorno = -1;
-    } else if ($patidaUno['jugador'] > $partidaDos['jugador']) {
+    } else if ($partidaUno['jugador'] > $partidaDos['jugador']) {
         $variableRetorno = 1;
     }
     if ($partidaUno['palabraWordix'] < $partidaDos['palabraWordix']) {
