@@ -297,7 +297,7 @@ function resumenJ($coleccion)
  * @return int
  */
 
-function comparar($a, $b)
+function comparar($apartidaUno, $partidaDos)
     //int $variableRetorno
 {
     if ($partidaUno['jugador'] < $partidaDos['jugador']) {
