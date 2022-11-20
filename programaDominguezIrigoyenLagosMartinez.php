@@ -53,7 +53,7 @@ function cargarColeccionPalabras()
  */
 function seleccionarOpcion()
 {
-//int $opcion
+    //int $opcion
 
     echo "\n -------- MENÚ DE OPCIONES--------\n";
     echo "\n   1) Jugar al Wordix con una palabra elegida";
@@ -298,8 +298,9 @@ function resumenJ($coleccion)
  */
 
 function comparar($partidaUno, $partidaDos)
-    //int $variableRetorno
+//int $variableRetorno
 {
+    $variableRetorno = 0;
     if ($partidaUno['jugador'] < $partidaDos['jugador']) {
         $variableRetorno = -1;
     } else if ($partidaUno['jugador'] > $partidaDos['jugador']) {
@@ -324,8 +325,27 @@ function ordenarColeccion($coleccion)
     print_r($coleccion);
 }
 
+/**
+ * Función para verificar si un jugador ya jugó cierta palabra
+ * @param 
+ * @return bool
+ */
 
-
+function esRepetida($jugador, $numero, $partidas, $palabras)
+{
+    //bool $repetida
+    $i = 0;
+    $repetida = false;
+    do {
+        if ($jugador == $partidas[$i]["jugador"]) {
+            if ($palabras[$numero] == $partidas[$i]["palabraWordix"]) {
+                $repetida = true;
+            }
+        }
+        $i++;
+    } while ($i < count($partidas) && $repetida == false);
+    return $repetida;
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -350,6 +370,12 @@ do {
             $nombreJugador = nombreEnMinusculas();
             echo "Elegir un número: ";
             $numeroPalabra = solicitarNumeroEntre(0, count($coleccionPalabras));
+            $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
+            while ($estaRepetida == true) {
+                echo "El jugador " . $nombreJugador . " ya jugó con esa palabra, ingrese otro número: ";
+                $numeroPalabra = solicitarNumeroEntre(0, count($coleccionPalabras));
+                $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
+            }
             $partida = jugarPartida($numeroPalabra, $nombreJugador, $coleccionPalabras);
             array_push($coleccionPartidas, $partida);
             break;
@@ -357,6 +383,11 @@ do {
             //Jugar al Wordix con una palabra al azar
             $nombreJugador = nombreEnMinusculas();
             $numeroPalabra = rand(0, count($coleccionPalabras));
+            $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
+            while ($estaRepetida == true) {
+                $numeroPalabra = rand(0, count($coleccionPalabras));
+                $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
+            }
             $partida = jugarPartida($numeroPalabra, $nombreJugador, $coleccionPalabras);
             array_push($coleccionPartidas, $partida);
             break;
