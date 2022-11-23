@@ -335,17 +335,15 @@ function esRepetida($jugador, $numero, $partidas, $palabras)
 {
     //bool $repetida
     $i = 0;
-    $repetida = false;
     do {
-        if ($jugador == $partidas[$i]["jugador"]) {
-            if ($palabras[$numero] == $partidas[$i]["palabraWordix"]) {
-                $repetida = true;
+        if (($jugador == $partidas[$i]["jugador"]) && ($palabras[$numero-1] == $partidas[$i]["palabraWordix"])){
+            return true;
             }
-        }
         $i++;
-    } while ($i < count($partidas) && $repetida == false);
-    return $repetida;
+    } while ($i < count($partidas));
+    return false;
 }
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -369,11 +367,11 @@ do {
             //Jugar al Wordix con una palabra elegida
             $nombreJugador = nombreEnMinusculas();
             echo "Elegir un número: ";
-            $numeroPalabra = solicitarNumeroEntre(0, count($coleccionPalabras));
+            $numeroPalabra = solicitarNumeroEntre(1, count($coleccionPalabras));
             $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
-            while ($estaRepetida == true) {
+            while ($estaRepetida) {
                 echo "El jugador " . $nombreJugador . " ya jugó con esa palabra, ingrese otro número: ";
-                $numeroPalabra = solicitarNumeroEntre(0, count($coleccionPalabras));
+                $numeroPalabra = solicitarNumeroEntre(1, count($coleccionPalabras));
                 $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
             }
             $partida = jugarPartida($numeroPalabra, $nombreJugador, $coleccionPalabras);
@@ -382,10 +380,10 @@ do {
         case 2:
             //Jugar al Wordix con una palabra al azar
             $nombreJugador = nombreEnMinusculas();
-            $numeroPalabra = rand(0, count($coleccionPalabras));
+            $numeroPalabra = rand(1, count($coleccionPalabras));
             $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
             while ($estaRepetida == true) {
-                $numeroPalabra = rand(0, count($coleccionPalabras));
+                $numeroPalabra = rand(1, count($coleccionPalabras));
                 $estaRepetida = esRepetida($nombreJugador, $numeroPalabra, $coleccionPartidas, $coleccionPalabras);
             }
             $partida = jugarPartida($numeroPalabra, $nombreJugador, $coleccionPalabras);
